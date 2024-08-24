@@ -1,21 +1,52 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        google()
-    }
-    dependencies {
-        classpath "com.android.tools.build:gradle:4.2.2"
-    }
+
+plugins {
+    id 'com.android.application' version '7.4.2' apply false
+    id 'com.android.library' version '7.4.2' apply false
+    id 'org.jetbrains.kotlin.android' version '1.8.0' apply false
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        maven { url "https://jitpack.io" }
-    }
+ext {
+    kotlin_version = '1.8.0'
+    lifecycle_version = "2.6.0"
+    buildVersion = "7.4.2"
+    databinding_version = "$buildVersion"
+
+    min_sdk = 24 // 支持的最小版本
+    max_sdk = 34 // 支持的最大版本
 }
 
-task clean(type: Delete) {
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = "UTF-8"
+}
+
+tasks.withType(Javadoc).configureEach {
+    options.encoding = "UTF-8"
+}
+
+tasks.register('clean', Delete) {
     delete rootProject.buildDir
 }
+
+
+
+//buildscript {
+////    repositories {
+////        gradlePluginPortal()
+////        maven { url("https://maven.aliyun.com/repository/google") }
+////        maven { url("https://maven.aliyun.com/repository/central") }
+////        maven { url("https://maven.aliyun.com/repository/gradle-plugin") }
+////        maven { url("https://maven.aliyun.com/repository/public") }
+////        maven { url("https://maven.aliyun.com/repository/jcenter") }
+////        maven { url("https://www.jitpack.io") }
+////        google()
+////        mavenCentral()
+////    }
+//    dependencies {
+//        classpath "com.android.tools.build:gradle:4.2.2"
+//    }
+//}
+//
+//tasks.register('clean', Delete) {
+//    delete rootProject.buildDir
+//}

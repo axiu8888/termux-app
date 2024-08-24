@@ -1,8 +1,9 @@
 package com.termux.app;
 
-import android.app.Application;
 import android.content.Context;
 
+import com.hsrg.android.AppBase;
+import com.hsrg.android.CtxUtils;
 import com.termux.BuildConfig;
 import com.termux.shared.errors.Error;
 import com.termux.shared.logger.Logger;
@@ -17,7 +18,9 @@ import com.termux.shared.termux.shell.am.TermuxAmSocketServer;
 import com.termux.shared.termux.shell.TermuxShellManager;
 import com.termux.shared.termux.theme.TermuxThemeUtils;
 
-public class TermuxApplication extends Application {
+import java.io.File;
+
+public class TermuxApplication extends AppBase {
 
     private static final String LOG_TAG = "TermuxApplication";
 
@@ -82,4 +85,10 @@ public class TermuxApplication extends Application {
         preferences.setLogLevel(null, preferences.getLogLevel());
     }
 
+
+    @Override
+    protected File getRootDir() {
+        //return super.getRootDir();
+        return CtxUtils.getAppPublicExternalStorage("");
+    }
 }

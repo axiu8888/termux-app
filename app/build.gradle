@@ -26,8 +26,8 @@ android {
         implementation "androidx.drawerlayout:drawerlayout:1.1.1"
         implementation "androidx.preference:preference:1.1.1"
         implementation "androidx.viewpager:viewpager:1.0.0"
-        implementation "com.google.android.material:material:1.4.0"
-        implementation "com.google.guava:guava:24.1-jre"
+//        implementation "com.google.android.material:material:1.4.0"
+//        implementation "com.google.guava:guava:24.1-jre"
         implementation "io.noties.markwon:core:$markwonVersion"
         implementation "io.noties.markwon:ext-strikethrough:$markwonVersion"
         implementation "io.noties.markwon:linkify:$markwonVersion"
@@ -112,6 +112,9 @@ android {
 
     lintOptions {
         disable 'ProtectedPermissions'
+        checkReleaseBuilds false
+        abortOnError false
+        ignoreWarnings false
     }
 
     testOptions {
@@ -121,6 +124,13 @@ android {
     }
 
     packagingOptions {
+        exclude 'META-INF/*'
+        exclude 'com/**/README.txt'
+        exclude 'com/**/license.txt'
+        exclude 'com/**/LICENSE'
+        exclude '*junit*'
+        exclude 'junit/**'
+        exclude 'LICENSE*'
         jniLibs {
             useLegacyPackaging true
         }
@@ -141,6 +151,19 @@ android {
 }
 
 dependencies {
+    api fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+
+    [
+        'androidx.multidex:multidex:2.0.1',
+        'androidx.legacy:legacy-support-v4:1.0.0',
+        'androidx.annotation:annotation:1.7.1',
+        'androidx.work:work-runtime:2.8.1', // 适配 Android 高版本
+        'com.airbnb.android:lottie:6.4.0', // 动画
+        'com.google.code.gson:gson:2.11.0',
+    ].forEach {
+        api(it)
+    }
+
     testImplementation "junit:junit:4.13.2"
     testImplementation "org.robolectric:robolectric:4.10"
     coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:1.1.5"
