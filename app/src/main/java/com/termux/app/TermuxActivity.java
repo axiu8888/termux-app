@@ -284,13 +284,7 @@ public final class TermuxActivity extends AppCompatActivity implements ServiceCo
 
 
         if (!CtxUtils.canPublicStorage(true)) {
-            //Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-            //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            //intent.setData(Uri.parse("package:" + getPackageName()));
-            //startActivityForResult(intent, 123);
             ActivityResultUtils.startManageAllAppFilesSettings(this, (code, ok, intent) -> {});
-        } else {
-            getFileManager().getDirectory("", true);
         }
 
     }

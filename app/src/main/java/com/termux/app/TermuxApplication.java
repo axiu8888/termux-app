@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.hsrg.android.AppBase;
 import com.hsrg.android.CtxUtils;
+import com.hsrg.android.core.file.FileManager;
 import com.termux.BuildConfig;
 import com.termux.shared.errors.Error;
 import com.termux.shared.logger.Logger;
@@ -23,6 +24,14 @@ import java.io.File;
 public class TermuxApplication extends AppBase {
 
     private static final String LOG_TAG = "TermuxApplication";
+
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        CtxUtils.get().app(this);
+        FileManager.get().setRoot(getRootDir(), true);
+    }
 
     public void onCreate() {
         super.onCreate();

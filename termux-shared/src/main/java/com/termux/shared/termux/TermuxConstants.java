@@ -1,7 +1,9 @@
 package com.termux.shared.termux;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 
+import com.hsrg.android.core.file.FileManager;
 import com.termux.shared.shell.command.ExecutionCommand;
 import com.termux.shared.shell.command.ExecutionCommand.Runner;
 
@@ -573,6 +575,7 @@ public final class TermuxConstants {
 
     /** Termux app internal private app data directory path */
     @SuppressLint("SdCardPath")
+//    public static final String TERMUX_INTERNAL_PRIVATE_APP_DATA_DIR_PATH = FileManager.get().getRootPath() + "/" + TERMUX_PACKAGE_NAME; // Default: "/data/data/com.termux"
     public static final String TERMUX_INTERNAL_PRIVATE_APP_DATA_DIR_PATH = "/data/data/" + TERMUX_PACKAGE_NAME; // Default: "/data/data/com.termux"
     /** Termux app internal private app data directory */
     public static final File TERMUX_INTERNAL_PRIVATE_APP_DATA_DIR = new File(TERMUX_INTERNAL_PRIVATE_APP_DATA_DIR_PATH);
@@ -684,11 +687,6 @@ public final class TermuxConstants {
     public static final File TERMUX_APPS_DIR = new File(TERMUX_APPS_DIR_PATH);
 
 
-    /** Termux app $PREFIX directory path ignored sub file paths to consider it empty */
-    public static final List<String> TERMUX_PREFIX_DIR_IGNORED_SUB_FILES_PATHS_TO_CONSIDER_AS_EMPTY = Arrays.asList(
-        TermuxConstants.TERMUX_TMP_PREFIX_DIR_PATH, TermuxConstants.TERMUX_ENV_TEMP_FILE_PATH, TermuxConstants.TERMUX_ENV_FILE_PATH);
-
-
 
     /*
      * Termux app and plugin preferences and properties file paths.
@@ -782,7 +780,13 @@ public final class TermuxConstants {
     public static final String TERMUX_ENV_TEMP_FILE_PATH = TERMUX_CONFIG_PREFIX_DIR_PATH + "/termux.env.tmp"; // Default: "/data/data/com.termux/files/usr/etc/termux/termux.env.tmp"
 
 
+    /** Termux app $PREFIX directory path ignored sub file paths to consider it empty */
+    public static final List<String> TERMUX_PREFIX_DIR_IGNORED_SUB_FILES_PATHS_TO_CONSIDER_AS_EMPTY = Arrays.asList(
+        TermuxConstants.TERMUX_TMP_PREFIX_DIR_PATH, TermuxConstants.TERMUX_ENV_TEMP_FILE_PATH, TermuxConstants.TERMUX_ENV_FILE_PATH);
 
+    static {
+        Log.e("TERMUX_PREFIX_DIR_IGNORED_SUB_FILES_PATHS_TO_CONSIDER_AS_EMPTY", "TERMUX_PREFIX_DIR_IGNORED_SUB_FILES_PATHS_TO_CONSIDER_AS_EMPTY =====>: " + TERMUX_PREFIX_DIR_IGNORED_SUB_FILES_PATHS_TO_CONSIDER_AS_EMPTY);
+    }
 
     /*
      * Termux app plugin specific paths.
